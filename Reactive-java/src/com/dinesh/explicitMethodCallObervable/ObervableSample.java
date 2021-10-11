@@ -17,6 +17,14 @@ public class ObervableSample {
 		
 	}
 
+	//onNext call 
+		private static void onNextCall() {
+			Observable<String> observable = Observable.just("Sample Observable with onNext");
+			Action1<String> onNextCall = msgToDisplay ->System.out.println(msgToDisplay);
+			observable.subscribe(onNextCall);//cold obsevable--not invoke until subscribe
+		}
+
+	
 	//onNext and onError call
 	private static void onErrorCall() {
 		Observable<String> observable = Observable.just("Sample Observable with onNext and onError");
@@ -27,13 +35,7 @@ public class ObervableSample {
 		
 	}
 
-	//onNext call 
-	private static void onNextCall() {
-		Observable<String> observable = Observable.just("Sample Observable with onNext");
-		Action1<String> onNextCall = msgToDisplay ->System.out.println(msgToDisplay);
-		observable.subscribe(onNextCall);//cold obsevable--not invoke until subscribe
-	}
-
+	
 	//observer method call
 	public static void observerMethodCall() {
 		  Observable<String> myObservable = Observable.just("Testing rxjava example");
