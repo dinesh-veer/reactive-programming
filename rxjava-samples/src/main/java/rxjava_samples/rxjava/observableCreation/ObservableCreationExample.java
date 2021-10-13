@@ -20,6 +20,8 @@ public class ObservableCreationExample {
 		System.out.println("\n-----------------------------\n");
 		System.out.println("Observable using inerval");
 		observableUsingInterval();
+		System.out.println("\n-----------------------------\n");
+		
 
 	}
 
@@ -54,7 +56,7 @@ public class ObservableCreationExample {
 
 	}
 
-	// Blocking subscriber for printing values
+	// Blocking subscriber for printing values prints 0-9 each after 2 seconds
 	private static void observableUsingInterval() {
 
 		Observable.interval(2, TimeUnit.SECONDS).take(10).blockingSubscribe(System.out::print);
