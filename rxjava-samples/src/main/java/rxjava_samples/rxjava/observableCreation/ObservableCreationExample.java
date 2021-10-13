@@ -14,10 +14,11 @@ public class ObservableCreationExample {
 		System.out.println("Observable using fromIterable");
 		ObservableFromIterable();
 		System.out.println("\n-----------------------------");
-		
+		observableFromCreateEmitter();
 	}
 
-	
+
+
 	private static void observableFromJust() {
 	
 		Observable<Integer> observable = Observable.just(1,2,3,4,5,6);
@@ -29,5 +30,22 @@ public class ObservableCreationExample {
 		observable.subscribe(System.out::print);
 	}
 
+	private static void observableFromCreateEmitter() {
+	
+		Observable<Integer> observable = Observable.create(emit->{
+			emit.onNext(1);
+			emit.onNext(2);
+			emit.onNext(3);
+			emit.onNext(4);
+			emit.onNext(5);
+			//emit.onNext(null);//onError called when error happens on null value
+			emit.onComplete();
+		});
+		
+		observable.subscribe(result->System.out.println(result),
+				error->System.out.println(error.getMessage()),
+				()->System.out.println("Completed called"));
+		
+	}
 
 }
