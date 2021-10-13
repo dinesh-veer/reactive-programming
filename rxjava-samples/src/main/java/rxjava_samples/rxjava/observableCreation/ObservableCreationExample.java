@@ -18,13 +18,14 @@ public class ObservableCreationExample {
 		System.out.println("Observable using Emmiter");
 		observableFromCreateEmitter();
 		System.out.println("\n-----------------------------\n");
+		System.out.println("Observable using range");
+		observableUsingRange();
+		System.out.println("\n-----------------------------\n");
 		System.out.println("Observable using inerval");
 		observableUsingInterval();
-		System.out.println("\n-----------------------------\n");
 		
-
 	}
-
+	
 	// creating observable from just method
 	private static void observableFromJust() {
 
@@ -56,6 +57,12 @@ public class ObservableCreationExample {
 
 	}
 
+	//Creating observable from range 
+		private static void observableUsingRange() {
+			Observable.range(10, 10)
+			.blockingSubscribe(System.out::print);
+		}
+	
 	// Blocking subscriber for printing values prints 0-9 each after 2 seconds
 	private static void observableUsingInterval() {
 
