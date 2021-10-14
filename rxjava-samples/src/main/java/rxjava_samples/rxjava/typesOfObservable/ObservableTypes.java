@@ -13,11 +13,15 @@ public class ObservableTypes {
 		System.out.println("---------------------");
 		coldObservableExample();
 		System.out.println("---------------------");
+		
 		System.out.println("Hot Observable ");
 		System.out.println("---------------------");
-
 		hotObservableExample();
+		System.out.println("---------------------");
+		System.out.println("Connectable Observable ");
+		System.out.println("---------------------");
 		connectableObservable();
+		System.out.println("---------------------");
 	}
 
 	/**
@@ -35,12 +39,21 @@ public class ObservableTypes {
 		observable.subscribe(item -> System.out.println("Second Observer: " + item));
 	}
 
-	private static void hotObservableExample() {
-		// TODO Auto-generated method stub
-
+	/**
+	 * Convert cold observable to Hot using pulish method
+	 * @throws InterruptedException
+	 */
+	private static void hotObservableExample() throws InterruptedException {
+		//A Cold Observale can be converted to a Hot Observable with a simple publish.
+		ConnectableObservable<Long> hot = Observable.interval(500, TimeUnit.MILLISECONDS)
+                									.publish(); // returns ConnectableObservable
+		hot.connect(); // connect to subscribe
+		hot.subscribe(item -> System.out.println("Subscriber 1-- " + item));
+		Thread.sleep(1000);
+		hot.subscribe(item2 -> System.out.println("Subscriber 2-- " + item2));
 	}
 
-	/*
+	/**
 	 * To convert an observable to a connectable one, you can use the publish
 	 * operator. Publishing the observable will make it hot and will not replay the
 	 * items for observers after activation.
@@ -49,7 +62,7 @@ public class ObservableTypes {
 	private static void connectableObservable() throws InterruptedException {
 
 		Observable<Long> myObservable = Observable.interval(1, TimeUnit.SECONDS);
-		ConnectableObservable<Long> connectableObservable = myObservable.publish();
+		ConnectableObservable<Long> connectableObservable = myObservable.publish();//convert cold observable to hot
 		connectableObservable.subscribe(item -> System.out.println("First Observer : " + item));
 		connectableObservable.connect();// running the code will not emit anything. That is because a connectable
 										// observer requires the connect method to be invoked to begin emission
