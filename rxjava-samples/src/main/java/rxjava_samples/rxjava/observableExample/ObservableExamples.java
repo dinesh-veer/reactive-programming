@@ -1,4 +1,4 @@
-package rxjava_samples.rxjava.samples;
+package rxjava_samples.rxjava.observableExample;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
