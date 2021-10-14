@@ -11,7 +11,7 @@ public class ObservableErrorExample {
 		observableSameExceptioninstanceExample();
 		System.out.println("----------------------");
 		System.out.println("----------------------");
-		System.out.println("Observable with error returns new exception instance");
+		System.out.println("Observable with error returns new exception instance using callable instance");
 		observableNewExceptioninstanceExample();
 		System.out.println("----------------------");
 
@@ -30,8 +30,13 @@ public class ObservableErrorExample {
 	}
 
 	private static void observableNewExceptioninstanceExample() {
-		// TODO Auto-generated method stub
+		//callable functional interface creates new object everytime
+		Observable observable = Observable.error(()-> {	System.out.println("new instance creating");
+														return new Exception("Manual exception is thrown");});
 		
+		observable.subscribe(System.out::println,exception->{System.out.println("first subscription hashcode value  =" +exception.hashCode());});
+		observable.subscribe(System.out::println,exception->{System.out.println("second subscription hashcode value  =" +exception.hashCode());});
+ 
 	}
 
 }
