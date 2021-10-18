@@ -58,6 +58,7 @@ public class ObservableCreationExample {
 	}
 
 	//Creating observable from range 
+	//range(start,count) it will print elements like (start + count - 1)
 		private static void observableUsingRange() {
 			Observable.range(10, 10)
 			.blockingSubscribe(System.out::print);
