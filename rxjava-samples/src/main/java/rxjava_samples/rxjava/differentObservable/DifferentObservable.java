@@ -1,6 +1,9 @@
 package rxjava_samples.rxjava.differentObservable;
 
+import io.reactivex.Maybe;
+import io.reactivex.MaybeObserver;
 import io.reactivex.Single;
+import io.reactivex.disposables.Disposable;
 
 public class DifferentObservable {
 
@@ -18,7 +21,33 @@ public class DifferentObservable {
 	}
 	
 	private static void mayBeObservable() {
-		// TODO Auto-generated method stub
 		
+		//in this way it may or maynot emit value but it can subscribe and 
+		//complete it
+		Maybe<String> stringObservable = Maybe.empty();
+		//Maybe<String> stringObservable = Maybe.just("test");
+		stringObservable.subscribe(new MaybeObserver() {
+
+			@Override
+			public void onSubscribe(Disposable d) {
+				System.out.println("onSubscribe "+d);
+			}
+
+			@Override
+			public void onSuccess(Object t) {
+				System.out.println("onSuccess "+t);
+			}
+
+			@Override
+			public void onError(Throwable e) {
+				System.out.println("OnError "+e);
+				
+			}
+
+			@Override
+			public void onComplete() {
+				System.out.println("onComplete ");
+			}
+		});
 	}
 }
