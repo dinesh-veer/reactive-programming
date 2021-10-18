@@ -18,7 +18,7 @@ public class ObservableDeferExample {
 		System.out.println("-----------------------");
 		
 		System.out.println("----Using Defer method----");
-		Observable<Integer> observabledefer = Observable.defer(()->{
+		Observable<Integer> observabledefer = Observable.defer(()->{System.out.println("Start :"+startDefer +" Count :"+countDefer);
 																return Observable.range(startDefer, countDefer);//range(0,3)
 																});
 		System.out.println("----Using first Observable----");
